@@ -1,0 +1,19 @@
+#!/usr/bin/with-contenv bash
+
+# create our folders
+mkdir -p \
+	/config/todomini
+
+# create symlinks
+[[ ! -L /var/www/localhost/todomini ]] && \
+	ln -s /usr/share/webapps/todomini /var/www/localhost/todomini
+[[ -d /usr/share/webapps/todomini/data ]] && \
+	rm -rf /usr/share/webapps/todomini/data
+[[ ! -L /usr/share/webapps/todomini/data ]] && \
+	ln -s /config/todomini /usr/share/webapps/todomini/data
+
+# permissions
+chown -R abc:abc \
+	/config \
+	/usr/share/webapps/todomini \
+	/var/www/localhost/todomini
